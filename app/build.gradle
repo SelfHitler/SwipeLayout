@@ -47,8 +47,8 @@ dependencies {
     implementation 'androidx.vectordrawable:vectordrawable:1.1.0'
 
     implementation 'androidx.recyclerview:recyclerview:1.1.0'
-    //implementation project(':swipelibrary')
-    implementation "com.github.SelfHitler:SwipeLayout:V1.0.0"
+    implementation project(':swipelibrary')
+    //implementation "com.github.SelfHitler:SwipeLayout:V1.0.0"
 
     implementation 'com.intuit.sdp:sdp-android:1.0.6'
 

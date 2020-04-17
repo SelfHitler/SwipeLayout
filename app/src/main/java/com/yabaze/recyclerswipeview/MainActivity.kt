@@ -3,6 +3,7 @@ package com.yabaze.recyclerswipeview
 import android.graphics.Canvas
 import android.os.Bundle
 import android.util.Log
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.core.graphics.drawable.toBitmap
@@ -29,47 +30,46 @@ class MainActivity : AppCompatActivity() {
 
             backgroundColor = "#567897"
 
-            ContextCompat.getDrawable(this@MainActivity, R.drawable.sample_icon)?.toBitmap()?.let {
+            ContextCompat.getDrawable(this@MainActivity, R.drawable.background_box)?.toBitmap()?.let {
                 backgroundImage = it
             }
 
-            text = "Hi"
+            text = "Love"
 
-            ContextCompat.getDrawable(this@MainActivity, R.drawable.sample_icon)?.toBitmap()?.let {
+            ContextCompat.getDrawable(this@MainActivity, R.drawable.ic_heart)?.toBitmap()?.let {
                 iconBitmap = it
             }
 
-            textColor = "#874567"
+            textColor = "#CD4679"
 
         }
         val secondItem = SwipeItemDetail().apply {
 
             backgroundColor = "#567897"
 
-            ContextCompat.getDrawable(this@MainActivity, R.drawable.sample_icon)?.toBitmap()?.let {
+            ContextCompat.getDrawable(this@MainActivity, R.drawable.background_box)?.toBitmap()?.let {
                 backgroundImage = it
             }
 
-            text = "Sample"
+            text = "Like"
 
-            ContextCompat.getDrawable(this@MainActivity, R.drawable.sample_icon)?.toBitmap()?.let {
+            ContextCompat.getDrawable(this@MainActivity, R.drawable.ic_like)?.toBitmap()?.let {
                 iconBitmap = it
             }
 
-            textColor = "#874567"
+            textColor = "#CD4679"
 
         }
         val third = SwipeItemDetail().apply {
 
-            backgroundColor = "#A46578"
+            backgroundColor = "#FEEFDD"
 
-            ContextCompat.getDrawable(this@MainActivity, R.drawable.sample_icon)?.toBitmap()?.let {
-                backgroundImage = it
-            }
+            //text = "Call"
 
-            text = "Clock"
+            iconWidth = 150
+            iconHeight = 150
 
-            ContextCompat.getDrawable(this@MainActivity, R.drawable.sample_icon)?.toBitmap()?.let {
+            ContextCompat.getDrawable(this@MainActivity, R.drawable.ic_call)?.toBitmap()?.let {
                 iconBitmap = it
             }
 
@@ -78,32 +78,31 @@ class MainActivity : AppCompatActivity() {
         }
         val forth = SwipeItemDetail().apply {
 
-            backgroundColor = "#567897"
+            backgroundColor = "#FEEFDD"
 
-            ContextCompat.getDrawable(this@MainActivity, R.drawable.sample_icon)?.toBitmap()?.let {
-                backgroundImage = it
-            }
+            //text = "SnapChat"
 
-            text = "Sample"
+            iconWidth = 150
+            iconHeight = 150
 
-            ContextCompat.getDrawable(this@MainActivity, R.drawable.sample_icon)?.toBitmap()?.let {
+            ContextCompat.getDrawable(this@MainActivity, R.drawable.ic_snapchat)?.toBitmap()?.let {
                 iconBitmap = it
             }
 
-            textColor = "#874567"
+            textColor = "#CD4679"
 
         }
         val fifth = SwipeItemDetail().apply {
 
             backgroundColor = "#A46578"
 
-            ContextCompat.getDrawable(this@MainActivity, R.drawable.sample_icon)?.toBitmap()?.let {
+            ContextCompat.getDrawable(this@MainActivity, R.drawable.background_box)?.toBitmap()?.let {
                 backgroundImage = it
             }
 
-            text = "Clock"
+            text = "Share"
 
-            ContextCompat.getDrawable(this@MainActivity, R.drawable.sample_icon)?.toBitmap()?.let {
+            ContextCompat.getDrawable(this@MainActivity, R.drawable.ic_share)?.toBitmap()?.let {
                 iconBitmap = it
             }
 
@@ -129,9 +128,11 @@ class MainActivity : AppCompatActivity() {
                 when(state){
                     SwipeState.RIGHT->{
                         Log.e("clicked - ","${rightMenu[swipeButtonPosition].text}")
+                        Toast.makeText(this@MainActivity,"${rightMenu[swipeButtonPosition].id} Clicked",Toast.LENGTH_SHORT).show()
                     }
                     SwipeState.LEFT->{
                         Log.e("clicked - ","${leftMenu[swipeButtonPosition].text}")
+                        Toast.makeText(this@MainActivity,"${leftMenu[swipeButtonPosition].text} Clicked",Toast.LENGTH_SHORT).show()
                     }
                 }
             }

@@ -10,6 +10,7 @@ import androidx.recyclerview.widget.ItemTouchHelper.*
 import androidx.recyclerview.widget.RecyclerView
 import kotlin.math.max
 import kotlin.math.min
+import kotlin.math.roundToInt
 
 
 class SwipeController : Callback {
@@ -332,9 +333,28 @@ class SwipeController : Callback {
 
             val paint = Paint()
 
-            paint.color = Color.parseColor(item.backgroundColor)
+            item.backgroundImage?.let {
 
-            c.drawRoundRect(backgroundRect, 0f, 0f, paint)
+                try {
+                    it.height = if (backgroundRect.top > backgroundRect.bottom) {
+                        (backgroundRect.top - backgroundRect.bottom).roundToInt()
+                    } else {
+                        (backgroundRect.bottom - backgroundRect.top).roundToInt()
+                    }
+
+                    it.width = ((displayWidth * eachItemWidth).roundToInt())
+                } catch (e: Exception) {
+
+                }
+                c.drawBitmap(it, backgroundRect.left, backgroundRect.top, null)
+
+            } ?: kotlin.run {
+
+                paint.color = Color.parseColor(item.backgroundColor)
+
+                c.drawRoundRect(backgroundRect, 0f, 0f, paint)
+            }
+
 
             var textHeight = 0f
 
@@ -348,13 +368,22 @@ class SwipeController : Callback {
 
             item.iconBitmap?.let {
 
+                var a : Bitmap? = null
+                try {
+                    if (item.iconWidth > 0 && item.iconHeight > 0) {
+                        a = ImageUtils().getResizedBitmap(it,item.iconWidth,item.iconHeight)
+                    }
+                } catch (e: java.lang.Exception) {
+
+                }
+
                 val iconRect = RectF(
                     backgroundRect.centerX() - (it.width / 2),
                     backgroundRect.centerY() - (it.height / 2) - textHeight,
                     backgroundRect.centerX() + (it.width / 2),
                     backgroundRect.centerY() + (it.height / 2) + textHeight
                 )
-                c.drawBitmap(it, iconRect.left, iconRect.top, null)
+                c.drawBitmap(a?:it, iconRect.left, iconRect.top, null)
 
                 item.text?.let { text ->
                     if (!text.isBlank() || text.isNotEmpty()) {

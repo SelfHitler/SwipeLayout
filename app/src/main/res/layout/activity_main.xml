@@ -13,6 +13,6 @@
         android:orientation="horizontal"
         android:clipToPadding="false"
         android:overScrollMode="never"
-        android:background="@color/colorAccent"/>
+        android:background="@android:color/darker_gray"/>
 
 </LinearLayout>

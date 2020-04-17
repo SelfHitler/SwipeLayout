@@ -125,10 +125,15 @@ class MainActivity : AppCompatActivity() {
         val swipeController = SwipeController(object : SwipeControllerActions() {
 
             override fun onClicked(position: Int, state: SwipeState, swipeButtonPosition: Int) {
-                Log.e(
-                    " position $position",
-                    " state = ${state.name}  position $swipeButtonPosition"
-                )
+
+                when(state){
+                    SwipeState.RIGHT->{
+                        Log.e("clicked - ","${rightMenu[swipeButtonPosition].text}")
+                    }
+                    SwipeState.LEFT->{
+                        Log.e("clicked - ","${leftMenu[swipeButtonPosition].text}")
+                    }
+                }
             }
 
         }, this@MainActivity, rightMenu, leftMenu)

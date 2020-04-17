@@ -25,7 +25,7 @@ STEP 1:  Add Below lines into project-level build.gradle:
         
 STEP 2: Reference the library itself in your module-level build.gradle:      
 
-        implementation "com.github.SelfHitler:SwipeLayout:V1.0.0"
+        implementation "com.github.SelfHitler:SwipeLayout:V1.0.1"
 
 STEP 3: Must declare this Variable 
 

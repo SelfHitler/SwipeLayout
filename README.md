@@ -37,10 +37,15 @@ STEP 3: Must declare this Variable
     
     val item = SwipeItemDetail()
     item.backgroundColor = "#678976" (Optional) // background Color for the single column  #Default Background Color White
+    item.backgroundImage = ContextCompat.getDrawable(context, R.drawable.ic_heart).toBitmap() // (Optional)
     item.iconBitmap = ContextCompat.getDrawable(context, R.drawable.xxxxx).toBitmap()
     item.text = "left1" // (Optional)
     item.textColor = "#874567" (Optional) #default Text color BLACK
     item.textHeight = 40f (Optional) 
+    
+    item.iconWidth = 150 // to Resize Icon Image (Optional)
+    item.iconHeight = 150 // (Optional)
+    
       
 
 STEP 4:

@@ -4,6 +4,7 @@ import android.annotation.SuppressLint
 import android.app.Activity
 import android.content.Context
 import android.graphics.*
+import android.util.Log
 import android.view.MotionEvent
 import android.view.View
 import androidx.recyclerview.widget.ItemTouchHelper.*
@@ -133,7 +134,54 @@ class SwipeController : Callback {
             }
         }
         if (buttonShowedState === ButtonsState.GONE) {
-            super.onChildDraw(c, recyclerView, viewHolder, dX, dY, actionState, isCurrentlyActive)
+            Log.e("--------x-------",""+dX)
+
+
+
+            if(leftMenuItems.size==rightMenuItems.size){
+                super.onChildDraw(c, recyclerView, viewHolder, dX/2, dY, actionState, isCurrentlyActive)
+            } else {
+
+                if(dX>0){
+
+                    if(dX>displayWidth * eachItemWidth * leftMenuItems.size) {
+
+
+                        super.onChildDraw(
+                            c,
+                            recyclerView,
+                            viewHolder, displayWidth * eachItemWidth * leftMenuItems.size,
+                            dY,
+                            actionState,
+                            isCurrentlyActive
+                        )
+
+                    } else {
+                        super.onChildDraw(
+                            c,
+                            recyclerView,
+                            viewHolder, dX ,
+                            dY,
+                            actionState,
+                            isCurrentlyActive
+                        )
+                    }
+                    //left side
+
+                } else {
+                    if(dX>((-1)*displayWidth * eachItemWidth * rightMenuItems.size)) {
+
+                        super.onChildDraw(c, recyclerView, viewHolder, dX, dY, actionState, isCurrentlyActive)
+
+                    } else {
+                        super.onChildDraw(c, recyclerView, viewHolder, (-1)*displayWidth * eachItemWidth * rightMenuItems.size, dY, actionState, isCurrentlyActive)
+                    }
+
+                    //right side
+                }
+            }
+
+
         }
         currentItemViewHolder = viewHolder
     }
@@ -323,6 +371,16 @@ class SwipeController : Callback {
         val bottom = itemView.bottom
 
         for ((index, item) in allItems.withIndex()) {
+
+
+            if (buttonShowedState == ButtonsState.LEFT_VISIBLE && item.buttonState  == SwipeState.RIGHT ) {
+                return
+            }
+
+            /*else if (buttonShowedState == ButtonsState.RIGHT_VISIBLE && item.buttonState  == SwipeState.LEFT) {
+                return
+            }*/
+
 
             val backgroundRect = RectF(
                 left.toFloat() + index * (displayWidth * eachItemWidth),

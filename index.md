@@ -1,27 +1,109 @@
-## Welcome to GitHub Pages
+# SwipeLayout
+android Custom Swipe Action for RecyclerView
 
-You can use the [editor on GitHub](https://github.com/SelfHitler/SwipeLayout/edit/gh-pages/index.md) to maintain and preview the content for your website in Markdown files.
+[![License](https://img.shields.io/badge/license-Apache%202-4EB1BA.svg)](https://www.apache.org/licenses/LICENSE-2.0.html)
+[![Sdk](https://img.shields.io/badge/sdk-19%2B-brightgreen.svg?style=plastic)](https://android-arsenal.com/api?level=19)
 
-Whenever you commit to this repository, GitHub Pages will run [Jekyll](https://jekyllrb.com/) to rebuild the pages in your site, from the content in your Markdown files.
+![demo screenshot](images/left_swipe.png)   ![demo screenshot](images/right_swipe.png)
 
-### Markdown
+Feature
+-----------------
+RecyclerView Swipe Left & Swipe Right
+custom design on Swipe View
 
-Markdown is a lightweight and easy-to-use syntax for styling your writing. It includes conventions for
+How To
+-----------------
+How does another developer add this as a dependency?
 
-```markdown
-Syntax highlighted code block
+STEP 1:  Add Below lines into project-level build.gradle:    
 
-# Header 1
-## Header 2
-### Header 3
+        allprojects {
+          repositories {
+            // ...
+            maven { url 'https://jitpack.io' }
 
-- Bulleted
-- List
+          }
+        }
+        
+STEP 2: Reference the library itself in your module-level build.gradle:      
 
-1. Numbered
-2. List
+        implementation "com.github.SelfHitler:SwipeLayout:V1.0.1"
 
-**Bold** and _Italic_ and `Code` text
+STEP 3: Must declare this Variable 
 
-[Link](url) and ![Image](src)
-```
+ ``Kotlin``
+
+    val leftMenu = ArrayList<SwipeItemDetail>()
+        
+    val rightMenu = ArrayList<SwipeItemDetail>()
+    
+    val item = SwipeItemDetail()
+    item.backgroundColor = "#678976" (Optional) // background Color for the single column  #Default Background Color White
+    item.backgroundImage = ContextCompat.getDrawable(context, R.drawable.ic_heart).toBitmap() // (Optional)
+    item.iconBitmap = ContextCompat.getDrawable(context, R.drawable.xxxxx).toBitmap()
+    item.text = "left1" // (Optional)
+    item.textColor = "#874567" (Optional) #default Text color BLACK
+    item.textHeight = 40f (Optional) 
+    
+    item.iconWidth = 150 // to Resize Icon Image (Optional)
+    item.iconHeight = 150 // (Optional)
+    
+      
+
+STEP 4:
+
+  ``Kotlin``
+        
+    val swipeController = SwipeController(object : SwipeControllerActions() {
+
+            override fun onClicked(position: Int, state: SwipeState, swipeButtonPosition: Int) {
+                when(state){
+                    SwipeState.RIGHT->{
+                        Log.e("clicked - ","${rightMenu[swipeButtonPosition].text}")
+                    }
+                    SwipeState.LEFT->{
+                        Log.e("clicked - ","${leftMenu[swipeButtonPosition].text}")
+                    }
+                }
+            }
+
+        }, context, rightMenu, leftMenu)
+
+        val itemTouchHelper = ItemTouchHelper(swipeController)
+        itemTouchHelper.attachToRecyclerView(recyclerView)
+
+        recyclerView.addItemDecoration(object : RecyclerView.ItemDecoration() {
+
+            override fun onDraw(c: Canvas, parent: RecyclerView, state: RecyclerView.State) {
+                swipeController.onDraw(c)
+            }
+        })
+        
+    
+## Reference:
+  - [@SwipeControl](https://medium.com/@fanfatal/android-swipe-menu-with-recyclerview-8f28a235ff28) 
+                      
+## Author
+
+👤 **Yabaze**
+
+- FaceBook: [@MirakleYabaze](https://www.facebook.com/mirakle.yabaze)
+- twitter: [@MirakleYabaze](https://twitter.com/mirakleyabaze)
+- instagram: [@Yabaze1](https://www.instagram.com/yabaze1/)
+
+License
+-----------------
+
+      Copyright (c) 2020-present, yabaze.t
+
+      Licensed under the Apache License, Version 2.0 (the "License");
+      you may not use this file except in compliance with the License.
+      You may obtain a copy of the License at
+
+            http://www.apache.org/licenses/LICENSE-2.0
+
+      Unless required by applicable law or agreed to in writing,
+      software distributed under the License is distributed on an "AS IS" BASIS,
+      WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+      See the License for the specific language governing permissions and
+      limitations under the License.

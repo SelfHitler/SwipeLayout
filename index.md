@@ -4,7 +4,7 @@ android Custom Swipe Action for RecyclerView
 [![License](https://img.shields.io/badge/license-Apache%202-4EB1BA.svg)](https://www.apache.org/licenses/LICENSE-2.0.html)
 [![Sdk](https://img.shields.io/badge/sdk-19%2B-brightgreen.svg?style=plastic)](https://android-arsenal.com/api?level=19)
 
-![demo screenshot](images/left_swipe.png)   ![demo screenshot](images/right_swipe.png)
+![demo screenshot](left_swipe.png)   ![demo screenshot](right_swipe.png)
 
 Feature
 -----------------
